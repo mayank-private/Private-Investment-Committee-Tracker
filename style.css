@@ -863,6 +863,170 @@ table.data tbody tr.edited {
   color: var(--danger);
 }
 
+/* =========================================================
+  17. ADMIN PASSWORD MODAL
+========================================================= */
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 19, 19, 0.58);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+}
+
+.admin-modal.show {
+  display: flex;
+  animation: fadeIn 0.18s ease;
+}
+
+.admin-modal-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(74, 14, 34, 0.08);
+  animation: modalPop 0.22s ease;
+}
+
+.admin-modal-top {
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold-500), var(--burgundy-700));
+}
+
+.admin-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 28px 18px;
+}
+
+.admin-modal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--burgundy-700), var(--burgundy-900));
+  color: var(--gold-500);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+}
+
+.admin-modal-header h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--burgundy-900);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.admin-modal-header p {
+  font-size: 12px;
+  color: var(--ink-500);
+  letter-spacing: 0.5px;
+}
+
+.admin-modal-body {
+  padding: 0 28px 24px;
+}
+
+.admin-modal-body label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.admin-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--burgundy-700);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--white);
+  transition: all var(--tx);
+  box-shadow: 0 2px 10px rgba(74, 14, 34, 0.05);
+}
+
+.admin-password-wrap:focus-within {
+  border-color: var(--burgundy-800);
+  box-shadow: 0 0 0 4px var(--burgundy-100);
+}
+
+.admin-password-wrap input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  height: 58px;
+  padding: 0 18px;
+  font-size: 16px;
+  flex: 1;
+  background: transparent;
+}
+
+.admin-password-wrap input::placeholder {
+  color: var(--ink-300);
+}
+
+.admin-eye {
+  width: 64px;
+  height: 58px;
+  border-left: 1px solid var(--ink-100);
+  display: grid;
+  place-items: center;
+  color: var(--ink-500);
+  font-size: 20px;
+  background: rgba(245, 232, 236, 0.35);
+  transition: all var(--tx);
+}
+
+.admin-eye:hover {
+  background: var(--burgundy-50);
+  color: var(--burgundy-700);
+}
+
+.admin-password-error {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-password-error.show {
+  display: block;
+}
+
+.admin-modal-actions {
+  padding: 20px 28px 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--ink-100);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Print styles */
 @media print {
   .nav-bar,

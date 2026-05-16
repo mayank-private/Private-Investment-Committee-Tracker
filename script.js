@@ -205,201 +205,297 @@ const App = (function () {
     /* IC → [Partner …] mapping (from Master RM_NAME column) */
     icToPartners: {
       'Aditya Samant Kapoor': [
+        'Roopsi Anand',
+        'Neeraj Krishan Rajput',
+        'Nishchay Jagdish Jethanandani',
+        'Mayank Mehta',
+        'Tarun Agarwal',
         'Nandita Kulbhushan Vats',
         'Pranjal Dwivedi',
         'Raghav Khanna',
         'Sachin Bhardwaj',
       ],
+
       'Amit Khanna': [
-        'Akash Kumar',
-        'Akshansh Joshi',
-        'Harsh Monga',
         'Meenakshi Rudresh J',
-        'Namrata Madan Vidyarthi',
-        'Nilesh Sarkar',
-      ],
-      'Anupam Lal': [
-        'Ankit Jain',
-        'Avnish Joshi',
-        'Lalit Goyal',
-        'Navneet Panigrahi',
-        'Varun Jawa',
-      ],
-      'Anurag Minj': [
-        'Chandu Gopi Krishna Kanth',
-        'Dinesh Arora',
-        'Durga Hari',
-        'John Rohan Sequeira',
-        'Kiran Kumar Alli',
-        'Nandini Reddy Bhimavarapu',
-        'P Sreekanth',
-        'Rahulrao Ramanarao Panduru',
-        'Revanth Kumar Matukumalli',
-        'Sandeep Reddy Vontikommu',
-        'Santosh Kumar A',
-        'Shalini B V',
-        'Sindhu K M Shet',
-        'Sukarno Jami',
-        'Tirupathi Marella',
-        'Vasudebo Naram',
-        'Venkata Satheesh Chitta',
-        'Venkataraman Natarajan',
-      ],
-      'Bhaskar Rautela': [
-        'Abhishek Vinod Beri',
-        'Akshay Balasaheb Patil',
-        'Deepak Suryavanshi',
-        'Nikhil Karn Puranik',
-        'Ninad Narayan Salunkhe',
-        'Shilpa Chadha',
+        'Azimul Haque',
+        'Bharat Popli',
         'Sonali Dhingra',
+        'Namrata Madan Vidyarthi',
+        'Harsh Monga',
+        'Nilesh Sarkar',
+        'Akshansh Joshi',
+      ],
+
+      'Anupam Lal': [
+        'Varun Jawa',
+        'Purnima Jain',
+        'Priya Vig',
+        'Ravi Mohan Srivastava',
+        'Manuj Suri',
+        'Lalit Goyal',
+        'Avnish Joshi',
+      ],
+
+      'Anurag Minj': [
+        'Tirupathi Marella',
+        'Santosh Kumar A',
+        'Sukarno Jami',
+        'Rajeev Tripathy',
+        'Revanth Kumar Matukumalli',
+        'N Sudhakar',
+        'Aysha Amreen',
+        'Venkataraman Natarajan',
+        'Rahulrao Ramanarao Panduru',
+        'P Sreekanth',
+        'Durga Hari',
+        'Sandeep Reddy Vontikommu',
+        'Vasudebo Naram',
+        'Kiran Kumar Alli',
+        'Chandu Gopi Krishna Kanth',
+        'Venkata Satheesh Chitta',
+        'Sindhu K M Shet',
+        'John Rohan Sequeira',
+        'Nandini Reddy Bhimavarapu',
+        'Shalini B V',
+      ],
+
+      'Bhaskar Rautela': [
+        'Anish M Desai',
+        'Ninad Narayan Salunkhe',
+        'Abhishek Vinod Beri',
         'Taizun Mohammed Badshah',
         'Yogesh Gupta',
+        'Richa Dhasmana',
+        'Deepak Suryawanshi',
+        'Shilpa Chadha',
+        'Akshay Balasaheb Patil',
+        'Nikhil Karn Puranik',
       ],
+
       'Chethan C': [
+        'Thrishul Kanthreddy',
         'C K Raghu',
-        'Kavitha Rai',
-        'Prabhakara S',
-        'Ramesh Rajasekar',
         'Samreen Nawab',
         'Senthil Kasiviswanathan',
+        'Kavitha Rai',
+        'Phillips Kurian',
+        'Ankit Choudhary',
+        'Prabhakara S',
+        'Ramesh Rajasekar',
       ],
+
       'Deepak Narain Chellani': [
-        'Ambrish Poonamchand Asopa',
-        'D Vivekanandan',
         'Iqbal Mehdi',
+        'Ambrish Poonamchand Asopa',
         'Jagdish K Biyani',
-        'Mahak Manoj Khanna',
-        'Rajeev Tripathy',
+        'Vikas P Jadhav',
+        'Sachin Kutty Shetty',
+        'Mahendra Parihar',
+        'Dinesh Arora',
+        'Ankur Sanjay Chemburkar',
+        'Chaitanya Pramod Koli',
+        'Viraj Nishith Panchmia',
         'Sandeep Kalra',
         'Sreejita Goswami',
-        'Sukamal Majee',
-        'Vikas P Jadhav',
-        'Viraj Nishith Panchmia',
+        'Mahak Manoj Khanna',
       ],
+
       'Hedley Albuquerque': [
-        'Ajay Kaushal',
-        'Amit Kumar Singh',
-        'Devesh Srivastava',
         'Farzoon Qureshi',
-        'Kamal Hasant Shroff',
-        'Ketan Amrut Vora',
-        'Mayuresh Narottam Bharadwa',
+        'Kaushlendra Makhu Singh',
+        'Dinesh Gobind Jhangiani',
         'Rajesh Ramesh Chaturvedi',
-        'Shanti Vijay Shukla',
-        'Shivani Dalal',
+        'Mayuresh Narottam Bharadwa',
+        'Amit Kumar Singh',
         'Sonia Verma',
+        'Ajay Kaushal',
+        'Ketan Amrut Vora',
+        'Shivani Dalal',
+        'Devesh Srivastava',
+        'Kamal Hasant Shroff',
+        'Shanti Vijay Shukla',
       ],
+
       'Juvin I C': [
-        'Antlin Jenifer R',
-        'Arjun Bhaskar',
-        'Jibi M Mathew Jacob',
-        'K Dinesh',
         'Karthic M',
-        'Karthikeyan G',
+        'K Dinesh',
+        'Arjun Bhaskar',
+        'Sreeram .H',
+        'Divya Sajil',
         'Nithin Rajan Subalaja',
+        'Jibi M Mathew Jacob',
+        'Karthikeyan G',
+        'Antlin Jenifer R',
         'Vijikumar V C',
       ],
+
       'Mallika Swarup': [
         'Gurpreet Singh',
-        'Mahendra Parihar',
-        'Parul Sharma',
+        'Sandeep Kaura',
+        'Kunal Bahl',
+        'Priyanka Sharma',
+        'Neeraj Kachru',
         'Rohit Sinha',
+        'Parul Sharma',
         'Seemant Sharma',
       ],
-      'Mayank Mehta': ['Akanksha Narain'],
+
+      'Mayank Mehta': [
+        'Amit Sharma',
+        'Ankur Garg',
+        'Syed Bilal Hussain',
+        'Nidhi Jaiswal',
+        'Kashish Kapoor',
+        'Akanksha Narain',
+      ],
+
       'Mudholkar Shrirang D': [
-        'Abhani Shreyas Satishbhai',
-        'Anshul Jain',
-        'Jigar P Pathak',
-        'Muskaan Madan',
-        'Niyati Mathias',
-        'Pradeep Kumar',
-        'Raithatha Amit',
-        'Rashi Naman Shukla',
-        'Shreepad Uddhavrao Wakodkar',
-        'Umed Singh Rao',
-      ],
-      'Nirmalya Majumdar': [
         'Dhananjay Nalinkant Mehta',
-        'Purnima Jain',
-        'Rakhi Kar',
+        'Niyati Majithia',
+        'Raj Kumar Jaiswal',
+        'Sachin Kirtikumar Vora',
+        'Shreepad Uddhavrao Wakodkar',
+        'Rashi Naman Shukla',
+        'Umed Singh Rao',
+        'Abhani Shreyas Satishbhai',
+        'Jigar P Pathak',
+        'Raithatha Amit',
+        'Anshul Jain',
+        'Muskaan Madan',
+      ],
+
+      'Nirmalya Majumdar': [
         'Soumyajit Ghosh',
+        'Sumona Sengupta Dutta',
+        'Gourav Doshi',
+        'Kaunak Biswas',
+        'Ashish Goenka',
+        'Kaushik Chakrabarty',
+        'Somenath Dey',
+        'Rakhi Kar',
       ],
+
       'Prince Pathania': [
-        'Anu Ahluwalia',
-        'Ashish Jain',
-        'Bhaskar Rajvanshi',
-        'Chirag Dahyabhai Kataria',
-        'Mansi Mahajan',
-        'Saurabh Gupta',
-      ],
-      'Rajat Kumar Mohapatra': ['Pradip Vitthal Jagtap', 'Sachin Kutty Shetty'],
-      'Ranjeet Kumar Jha': [
-        'Amit Audichya',
-        'Ankit Kanungo',
-        'Ankur Agarwal',
         'Dasmeet Singh Kohli',
+        'Mansi Mahajan',
+        'Ajay Bakshi',
+        'Kanuj Bharti',
+        'Akash Kumar',
+        'Saurabh Gupta',
+        'Bhaskar Rajvanshi',
+        'Anu Ahluwalia',
+      ],
+
+      'Rajat Kumar Mohapatra': ['Pradip Vitthal Jagtap', 'Puneet Panchaity'],
+
+      'Ranjeet Kumar Jha': [
+        'Ankit Jain',
+        'Ankur Agarwal',
+        'Abhishek Verma',
+        'Gaurav Sharma',
+        'Gaurav Agrahari',
+        'Indra Kumar Jain',
+        'Ankit Kanungo',
+        'Vipin Gupta',
         'Dilip Paliwal',
         'Kshitij Tiwari',
-        'Mansi Gambhir',
         'Saif Aijaz',
-        'Vipin Gupta',
+        'Amit Audichya',
+        'Mansi Gambhir',
       ],
+
       'Rupesh Kumar': [
-        'Ashish Singh',
         'Gurumurthy S',
+        'Abhishek Mallick',
+        'Ashish Deepak Mehta',
+        'Argha Banerjee',
+        'Soumya Mukherjee',
+        'K Jyoti',
+        'Nitesh Dave',
         'Harpreet Rohit Nagrale',
         'Niharika Azad',
-        'Nitesh Dave',
-        'Sandeep Kumar Pandey',
+        'Akshay Tyagi',
+        'Himanshu Goyal',
         'Sathish T',
         'Suruchi Rai',
+        'Sandeep Kumar Pandey',
         'Vivek Yadav',
+        'Ashish Singh',
       ],
+
       'Shashwat Gupta': [
-        'Debashis Mallick',
         'Manoj Kumar Sarma',
+        'Sukamal Majee',
+        'Biswajeet Sengupta',
+        'Vikash Kedia',
         'Siddhant Nawal',
-        'Sumona Sengupta Dutta',
+        'Debashis Mallick',
       ],
+
       'Suvid Nazar': [
-        'Akash Pareek',
-        'Bharat Dilip Kulkarni',
-        'Hetal Vinod Shah',
-        'Himani Hiren Pandya',
-        'Nishant Gordhan Thanki',
         'Priyank Amrutbhai Patel',
+        'Trivedi Tarak Maheshbhai',
+        'Jaykumar Solanki',
+        'Divyanand Tiwari',
+        'Zarna Harshad Zaveri',
+        'Shahnaz Zubin Mehta',
+        'Tejas Parekh',
+        'Jeetendra Kumar',
+        'Hetal Vinod Shah',
+        'Chirag Dahyabhai Katariya',
+        'Himani Hiren Pandya',
+        'Akash Pareek',
+        'Nishant Gordhan Thanki',
+        'Bharat Dilip Kulkarni',
       ],
-      'Tarun Dhingra': ['Kapil Chadha', 'Sandeep Kaura'],
+
+      'Tarun Dhingra': [
+        'Ashish Jain',
+        'Privanka Sharma',
+        'Swati Gupta',
+        'Kapil Chadha',
+      ],
+
       'Vijay Karumanchi': [
-        'Adyith Santhanam',
-        'Alok Banthia',
-        'C Arun',
+        'Suman Chakravarthy S',
         'J Santhanalakshmi',
-        'Kamalnath S',
         'M Ganesh Kumar',
-        'Pranot Prakash Patil',
+        'Vickram S',
+        'Kamalnath S',
+        'Alok Banthia',
+        'D Vivekanandan',
+        'Manivannan S',
+        'C Arun',
+        'Adyith Santhanam',
         'Ruthpriya J',
         'Sridhar A',
-        'Suman Chakravarthy S',
-        'Vickram S',
       ],
+
       'Vikalp Kamlesh Shah': [
-        'Ashwini Kumar Chanda',
-        'Ayan Kumar Bhowmick',
-        'Hemal Kanaiyalal Oza',
+        'Pranot Prakash Patil',
+        'Sarish Menon',
+        'Suresh Mogaveera',
+        'Parijat Ghosh',
+        'Omprakash Bechan Yadav',
+        'Shivani Kamal Rawat',
         'Jigna Chirag Sheth',
+        'Ayan Kumar Bhowmick',
+        'Ashwini Kumar Chanda',
         'Lakshmi Narayan',
-        'Priya Vig',
+        'Hemal Kanaiyalal Oza',
       ],
+
       'Vishal Balsara': [
-        'Antonio Vicente Ethelbert Dias',
-        'Harsh Vardhan',
         'Manish Ramesh Balwani',
-        'Mithila Pawar',
+        'Sumit Bhide',
+        'Pawan Jakhetia',
+        'Lokesh Singh Chauhan',
         'Shantanu Shrivastava',
+        'Antonio Vicente Ethelbert Dias',
         'Shobhit Agrawal',
+        'Harsh Vardhan',
+        'Mithila Pawar',
       ],
     },
 
@@ -1027,12 +1123,13 @@ const App = (function () {
   //   refreshAll();
   // }
 
+  let pendingRole = null;
+  const ADMIN_PASSWORD = 'qwer1234';
+
   function setRole(r) {
     const previous = state.role;
-
-    // ADMIN role protection
+    // ADMIN protection
     if (r === 'ADMIN') {
-      // Check admin allowlist first
       if (!isAdminAuthorized(state.user)) {
         alert('Unauthorized Admin Access');
         $('currentRole').value = previous;
@@ -1043,16 +1140,9 @@ const App = (function () {
         );
         return;
       }
-      // Ask for common admin password
-      const enteredPassword = prompt('Enter Admin Password');
-      // Common password for all admins
-      const ADMIN_PASSWORD = 'qwer1234';
-      if (enteredPassword !== ADMIN_PASSWORD) {
-        alert('Incorrect Admin Password');
-        $('currentRole').value = previous;
-        toast('error', 'Access Denied', 'Incorrect admin password.');
-        return;
-      }
+      pendingRole = r;
+      openAdminPasswordModal(previous);
+      return;
     }
     state.role = r;
     saveJSON(KEY_ROLE, state.role);
@@ -1061,6 +1151,65 @@ const App = (function () {
     toast('info', 'Role updated', 'Active role: ' + r);
     refreshUserSelect();
     refreshAll();
+  }
+
+  function openAdminPasswordModal(previousRole) {
+    const modal = $('adminPasswordModal');
+
+    modal.classList.add('show');
+
+    $('adminPasswordInput').value = '';
+
+    $('adminPasswordError').classList.remove('show');
+
+    modal.dataset.previousRole = previousRole || 'IC_MEMBER';
+
+    setTimeout(() => {
+      $('adminPasswordInput').focus();
+    }, 80);
+  }
+
+  function closeAdminPasswordModal() {
+    const modal = $('adminPasswordModal');
+
+    modal.classList.remove('show');
+
+    const previous = modal.dataset.previousRole || 'IC_MEMBER';
+
+    $('currentRole').value = previous;
+
+    pendingRole = null;
+  }
+
+  function verifyAdminPassword() {
+    const val = $('adminPasswordInput').value;
+
+    if (val !== ADMIN_PASSWORD) {
+      $('adminPasswordError').classList.add('show');
+      return;
+    }
+
+    state.role = pendingRole || 'ADMIN';
+
+    saveJSON(KEY_ROLE, state.role);
+
+    applyRolePermissions();
+
+    logAudit('ROLE_CHANGE', null, 'Role set to ADMIN');
+
+    toast('success', 'Access Granted', 'Admin access enabled');
+
+    closeAdminPasswordModal();
+
+    refreshUserSelect();
+
+    refreshAll();
+  }
+
+  function toggleAdminPassword() {
+    const input = $('adminPasswordInput');
+
+    input.type = input.type === 'password' ? 'text' : 'password';
   }
 
   /* Populate the User dropdown based on selected role */
@@ -2960,6 +3109,10 @@ const App = (function () {
     copyShareLink,
     setUser,
     setRole,
+    openAdminPasswordModal,
+    closeAdminPasswordModal,
+    verifyAdminPassword,
+    toggleAdminPassword,
     toast,
     _init: init,
     _state: () => state,

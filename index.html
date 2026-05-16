@@ -599,6 +599,48 @@
      TOAST CONTAINER
 ========================================================= -->
     <div class="toast-container" id="toastContainer"></div>
+    <!-- =========================================================
+    ADMIN PASSWORD MODAL
+========================================================= -->
+    <div id="adminPasswordModal" class="admin-modal">
+        <div class="admin-modal-card">
+            <div class="admin-modal-top"></div>
+
+            <div class="admin-modal-header">
+                <div class="admin-modal-icon">A</div>
+
+                <div>
+                    <h3>Admin Authentication</h3>
+                    <p>Burgundy Private · Secure Access</p>
+                </div>
+            </div>
+
+            <div class="admin-modal-body">
+                <label>Enter Admin Password</label>
+
+                <div class="admin-password-wrap">
+                    <input type="password" id="adminPasswordInput" placeholder="Enter password" autocomplete="off" />
+                    <button type="button" class="admin-eye" onclick="App.toggleAdminPassword()">
+                        👁
+                    </button>
+                </div>
+
+                <div id="adminPasswordError" class="admin-password-error">
+                    Incorrect password
+                </div>
+            </div>
+
+            <div class="admin-modal-actions">
+                <button type="button" class="btn btn-ghost" onclick="App.closeAdminPasswordModal()">
+                    Cancel
+                </button>
+
+                <button type="button" class="btn btn-primary" onclick="App.verifyAdminPassword()">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
