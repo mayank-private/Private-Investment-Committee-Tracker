@@ -1078,26 +1078,48 @@ const App = (function () {
 
   function setUser(u) {
     const old = state.user;
+
     state.user = (u || '').trim();
+
+    // Normalize admin aliases
+    if (state.role === 'ADMIN' && state.user) {
+      state.user = canonicaliseAdmin(state.user);
+    }
+
     saveJSON(KEY_USER, state.user);
-    // Re-validate admin authorization if the role is ADMIN
+
+    // Validate admin access again
     if (state.role === 'ADMIN' && !isAdminAuthorized(state.user)) {
       alert('Unauthorized Admin Access');
+
       state.role = 'IC_MEMBER';
+
       saveJSON(KEY_ROLE, state.role);
+
       $('currentRole').value = 'IC_MEMBER';
+
+      refreshUserSelect();
+
       toast(
         'error',
         'Unauthorized Admin Access',
         'Role reverted to IC Member.',
       );
     }
+
+    // Sync dropdown UI
+    if ($('currentUser')) {
+      $('currentUser').value = state.user;
+    }
+
     logAudit(
       'LOGIN',
       null,
       'User changed: ' + (old || '∅') + ' → ' + state.user,
     );
+
     applyRolePermissions();
+
     refreshAll();
   }
 
@@ -1128,28 +1150,67 @@ const App = (function () {
 
   function setRole(r) {
     const previous = state.role;
+
     // ADMIN protection
     if (r === 'ADMIN') {
+      if (!state.user) {
+        toast('error', 'Select User', 'Please select an admin user first.');
+
+        $('currentRole').value = previous;
+
+        return;
+      }
+
       if (!isAdminAuthorized(state.user)) {
         alert('Unauthorized Admin Access');
+
         $('currentRole').value = previous;
+
         toast(
           'error',
           'Unauthorized Admin Access',
           'You are not on the authorised Admin roster.',
         );
+
         return;
       }
+
       pendingRole = r;
+
       openAdminPasswordModal(previous);
+
       return;
     }
+
     state.role = r;
+
     saveJSON(KEY_ROLE, state.role);
-    applyRolePermissions();
-    logAudit('ROLE_CHANGE', null, 'Role set to ' + r);
-    toast('info', 'Role updated', 'Active role: ' + r);
+
+    // Refresh users FIRST
     refreshUserSelect();
+
+    // Auto-pick first valid user if current invalid
+    const availableUsers =
+      r === 'IC_MEMBER'
+        ? MASTER.icMembers
+        : ['Viewer', 'Auditor', 'Compliance'];
+
+    if (!availableUsers.includes(state.user)) {
+      state.user = availableUsers[0] || '';
+
+      saveJSON(KEY_USER, state.user);
+    }
+
+    if ($('currentUser')) {
+      $('currentUser').value = state.user;
+    }
+
+    applyRolePermissions();
+
+    logAudit('ROLE_CHANGE', null, 'Role set to ' + r);
+
+    toast('info', 'Role updated', 'Active role: ' + r);
+
     refreshAll();
   }
 
@@ -1169,16 +1230,23 @@ const App = (function () {
     }, 80);
   }
 
-  function closeAdminPasswordModal() {
+  function closeAdminPasswordModal(resetRole = true) {
     const modal = $('adminPasswordModal');
 
     modal.classList.remove('show');
 
-    const previous = modal.dataset.previousRole || 'IC_MEMBER';
+    // Only reset dropdown if auth cancelled/failed
+    if (resetRole) {
+      const previous = modal.dataset.previousRole || 'IC_MEMBER';
 
-    $('currentRole').value = previous;
+      $('currentRole').value = previous;
+    }
 
     pendingRole = null;
+
+    $('adminPasswordInput').value = '';
+
+    $('adminPasswordError').classList.remove('show');
   }
 
   function verifyAdminPassword() {
@@ -1186,12 +1254,26 @@ const App = (function () {
 
     if (val !== ADMIN_PASSWORD) {
       $('adminPasswordError').classList.add('show');
+
       return;
     }
 
-    state.role = pendingRole || 'ADMIN';
+    // SUCCESS
+    state.role = 'ADMIN';
+
+    // Normalize admin name
+    state.user = canonicaliseAdmin(state.user);
 
     saveJSON(KEY_ROLE, state.role);
+
+    saveJSON(KEY_USER, state.user);
+
+    // IMPORTANT: update UI dropdowns FIRST
+    $('currentRole').value = 'ADMIN';
+
+    refreshUserSelect();
+
+    $('currentUser').value = state.user;
 
     applyRolePermissions();
 
@@ -1199,9 +1281,8 @@ const App = (function () {
 
     toast('success', 'Access Granted', 'Admin access enabled');
 
-    closeAdminPasswordModal();
-
-    refreshUserSelect();
+    // false => don't revert dropdown
+    closeAdminPasswordModal(false);
 
     refreshAll();
   }
@@ -1215,9 +1296,11 @@ const App = (function () {
   /* Populate the User dropdown based on selected role */
   function refreshUserSelect() {
     const sel = $('currentUser');
+
     if (!sel) return;
-    const current = state.user;
+
     let opts = [];
+
     if (state.role === 'ADMIN') {
       opts = CONFIG.ADMIN_ALLOWLIST.slice();
     } else if (state.role === 'IC_MEMBER') {
@@ -1225,23 +1308,35 @@ const App = (function () {
     } else {
       opts = ['Viewer', 'Auditor', 'Compliance'];
     }
-    // Always include the currently-selected user even if not in the list,
-    // so admins reviewing data don't lose context.
-    if (current && !opts.includes(current)) opts.unshift(current);
+
+    // Remove duplicates
+    opts = [...new Set(opts)];
+
+    // Sort users
+    opts.sort((a, b) => a.localeCompare(b));
+
+    // Reset invalid selected user
+    if (state.user && !opts.includes(state.user)) {
+      state.user = '';
+      saveJSON(KEY_USER, '');
+    }
+
     sel.innerHTML =
       '<option value="">— Select user —</option>' +
       opts
         .map(
-          (o) =>
-            '<option value="' +
-            escapeHtml(o) +
-            '"' +
-            (o === current ? ' selected' : '') +
-            '>' +
-            escapeHtml(o) +
-            '</option>',
+          (o) => `
+      <option value="${escapeHtml(o)}">
+        ${escapeHtml(o)}
+      </option>
+    `,
         )
         .join('');
+
+    // Restore selected user safely
+    if (state.user && opts.includes(state.user)) {
+      sel.value = state.user;
+    }
   }
 
   /* When IC_MEMBER role is active, auto-fill the IC Member field in the entry form
