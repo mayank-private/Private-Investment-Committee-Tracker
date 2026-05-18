@@ -564,14 +564,23 @@ const App = (function () {
     }
   }
 
+  const HAS_FIREBASE = !!CONFIG.FIREBASE_URL;
+
   let state = {
-    records: loadJSON(KEY_RECORDS, []),
-    audit: loadJSON(KEY_AUDIT, []),
+    records: HAS_FIREBASE ? [] : loadJSON(KEY_RECORDS, []),
+
+    audit: HAS_FIREBASE ? [] : loadJSON(KEY_AUDIT, []),
+
     draft: loadJSON(KEY_DRAFT, null),
-    user: loadJSON(KEY_USER, ''),
-    role: loadJSON(KEY_ROLE, 'IC_MEMBER'),
+
+    // Always start fresh session
+    user: '',
+
+    role: 'IC_MEMBER',
+
     page: 'dashboard',
-    editingRef: null, // ref being edited (null for new entry)
+
+    editingRef: null,
   };
 
   /* =========================================================
