@@ -919,6 +919,21 @@ const App = (function () {
     return (s || 'all').replace(/[^A-Za-z0-9]+/g, '_').slice(0, 40);
   }
 
+  function syncRoleDropdownState() {
+    const roleEl = $('currentRole');
+
+    if (!roleEl) return;
+
+    const hasUser = !!(state.user || '').trim();
+
+    roleEl.disabled = !hasUser;
+
+    // Optional visual reset
+    if (!hasUser) {
+      roleEl.value = 'IC_MEMBER';
+    }
+  }
+
   /* =========================================================
                6. TOAST NOTIFICATIONS
             ========================================================= */
@@ -1090,6 +1105,12 @@ const App = (function () {
 
     state.user = (u || '').trim();
 
+    if (!state.user) {
+      state.role = 'IC_MEMBER';
+
+      $('currentRole').value = 'IC_MEMBER';
+    }
+
     // Normalize admin aliases
     if (state.role === 'ADMIN' && state.user) {
       state.user = canonicaliseAdmin(state.user);
@@ -1128,7 +1149,7 @@ const App = (function () {
     );
 
     applyRolePermissions();
-
+    syncRoleDropdownState();
     refreshAll();
   }
 
@@ -1199,19 +1220,8 @@ const App = (function () {
     refreshUserSelect();
 
     // Auto-pick first valid user if current invalid
-    const availableUsers =
-      r === 'IC_MEMBER'
-        ? MASTER.icMembers
-        : ['Viewer', 'Auditor', 'Compliance'];
-
-    if (!availableUsers.includes(state.user)) {
-      state.user = availableUsers[0] || '';
-
-      saveJSON(KEY_USER, state.user);
-    }
-
     if ($('currentUser')) {
-      $('currentUser').value = state.user;
+      $('currentUser').value = state.user || '';
     }
 
     applyRolePermissions();
@@ -1308,27 +1318,20 @@ const App = (function () {
 
     if (!sel) return;
 
-    let opts = [];
+    // Same users for all roles
+    let opts = MASTER.icMembers.slice();
 
-    if (state.role === 'ADMIN') {
-      opts = CONFIG.ADMIN_ALLOWLIST.slice();
-    } else if (state.role === 'IC_MEMBER') {
-      opts = MASTER.icMembers.slice();
-    } else {
-      opts = ['Viewer', 'Auditor', 'Compliance'];
-    }
+    // Add admin allowlist users
+    CONFIG.ADMIN_ALLOWLIST.forEach((a) => {
+      if (!opts.includes(a)) {
+        opts.push(a);
+      }
+    });
 
     // Remove duplicates
     opts = [...new Set(opts)];
 
-    // Sort users
     opts.sort((a, b) => a.localeCompare(b));
-
-    // Reset invalid selected user
-    if (state.user && !opts.includes(state.user)) {
-      state.user = '';
-      saveJSON(KEY_USER, '');
-    }
 
     sel.innerHTML =
       '<option value="">— Select user —</option>' +
@@ -1342,10 +1345,8 @@ const App = (function () {
         )
         .join('');
 
-    // Restore selected user safely
-    if (state.user && opts.includes(state.user)) {
-      sel.value = state.user;
-    }
+    // Restore selected user
+    sel.value = state.user || '';
   }
 
   /* When IC_MEMBER role is active, auto-fill the IC Member field in the entry form
@@ -3143,6 +3144,7 @@ const App = (function () {
       $('currentRole').value = 'IC_MEMBER';
     }
     refreshUserSelect();
+    syncRoleDropdownState();
     if (state.user) $('currentUser').value = state.user;
 
     // Restore draft
