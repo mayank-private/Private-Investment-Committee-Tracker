@@ -1153,28 +1153,6 @@ const App = (function () {
     refreshAll();
   }
 
-  // function setRole(r) {
-  //   const previous = state.role;
-  //   // Hard rule: ADMIN role requires user to be on the allowlist
-  //   if (r === 'ADMIN' && !isAdminAuthorized(state.user)) {
-  //     alert('Unauthorized Admin Access');
-  //     $('currentRole').value = previous;
-  //     toast(
-  //       'error',
-  //       'Unauthorized Admin Access',
-  //       'You are not on the authorised Admin roster.',
-  //     );
-  //     return;
-  //   }
-  //   state.role = r;
-  //   saveJSON(KEY_ROLE, state.role);
-  //   applyRolePermissions();
-  //   logAudit('ROLE_CHANGE', null, 'Role set to ' + r);
-  //   toast('info', 'Role updated', 'Active role: ' + r);
-  //   refreshUserSelect();
-  //   refreshAll();
-  // }
-
   let pendingRole = null;
   const ADMIN_PASSWORD = 'qwer1234';
 
@@ -1212,24 +1190,32 @@ const App = (function () {
       return;
     }
 
+    // ===== NON-ADMIN ROLE =====
+
     state.role = r;
 
     saveJSON(KEY_ROLE, state.role);
 
-    // Refresh users FIRST
+    // Sync dropdown UI
+    $('currentRole').value = r;
+
+    // Refresh dropdowns
     refreshUserSelect();
 
-    // Auto-pick first valid user if current invalid
+    // Preserve selected user
     if ($('currentUser')) {
       $('currentUser').value = state.user || '';
     }
 
+    // Apply RBAC permissions FIRST
     applyRolePermissions();
 
     logAudit('ROLE_CHANGE', null, 'Role set to ' + r);
 
     toast('info', 'Role updated', 'Active role: ' + r);
 
+    // IMPORTANT:
+    // refresh ONLY AFTER permissions fully updated
     refreshAll();
   }
 
@@ -3118,10 +3104,51 @@ const App = (function () {
   }
 
   function refreshAll() {
+    // ALWAYS recompute role-filtered records
+    // after any role/user change.
+    const visibleRecords = getVisibleRecords();
+
+    // Header labels
+    if ($('currentUserLabel')) {
+      $('currentUserLabel').textContent = state.user || '—';
+    }
+
+    if ($('currentRoleLabel')) {
+      $('currentRoleLabel').textContent = state.role || 'IC_MEMBER';
+    }
+
+    // Dashboard
     renderDashboard();
+
+    // Records table
     renderRecords();
-    $('navRecCount').textContent = getVisibleRecords().length;
+
+    // Reports
+    // renderReports();
+
+    // Audit logs
+    // renderAudit();
+
+    // Master page
+    renderMasterPage();
+
+    // Refresh report dropdowns
     refreshReportUserSelect();
+
+    // Apply permissions/UI rules
+    applyRolePermissions();
+
+    // Update nav count badge
+    const badge = document.querySelector(
+      '.nav-tab[data-page="records"] .count',
+    );
+
+    if (badge) {
+      badge.textContent = visibleRecords.length;
+    }
+
+    // Sync role dropdown enable/disable
+    syncRoleDropdownState();
   }
 
   /* =========================================================
